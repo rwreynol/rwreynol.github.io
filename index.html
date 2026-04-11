@@ -1,1 +1,718 @@
 Content coming soon ... 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --surface2: #1f1f1f;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #f0ede8;
+      --text-muted: #888880;
+      --accent: #c8f04a;
+      --accent-dim: rgba(200,240,74,0.12);
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 2px; }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); font-style: italic; }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav ul a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-size: 13px;
+      padding: 8px 18px;
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--surface);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 9rem;
+      padding-bottom: 6rem;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-eyebrow span {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 7vw, 76px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      max-width: 760px;
+    }
+
+    h1 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 13px 28px;
+      background: var(--accent);
+      color: #0d0d0d;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 13px 28px;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 14px;
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover { border-color: var(--text); transform: translateY(-1px); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .about-body { color: var(--text-muted); font-size: 16px; line-height: 1.8; margin-bottom: 1.5rem; }
+
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-stats { display: flex; flex-direction: column; }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-row:first-child { border-top: 1px solid var(--border); }
+
+    .stat-label { font-size: 13px; color: var(--text-muted); }
+    .stat-val { font-family: var(--font-display); font-size: 26px; color: var(--text); }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 1.75rem;
+      transition: background 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover { background: var(--surface2); }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-hover);
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .project-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-link {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+
+    .project-link:hover { opacity: 0.7; }
+
+    /* ── SKILLS ── */
+    .skills-cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .skill-group-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .skill-pill {
+      font-size: 13px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      background: var(--surface);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-pill:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── RESUME ── */
+    .resume-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .resume-item:first-of-type { border-top: 1px solid var(--border); }
+
+    .resume-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .resume-company { font-size: 14px; color: var(--text-muted); }
+    .resume-date { font-size: 13px; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+    }
+
+    .contact-intro { color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .contact-link {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-link::before { content: '↗'; font-size: 12px; color: var(--accent); }
+    .contact-link:hover { color: var(--text); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 12px; }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--text-muted); }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--accent); }
+
+    .contact-form textarea { min-height: 110px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav ul { display: none; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      h1 { font-size: 40px; }
+      section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Your<span>Name</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Hire me</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-eyebrow">
+      <div class="hero-dot"></div>
+      <span>Available for new projects</span>
+    </div>
+    <h1>I build things<br>for the <em>web</em> that<br>actually matter.</h1>
+    <p class="hero-sub">Designer, developer, maker of things. I help teams ship great products — fast and with care.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View my work</a>
+      <a href="#contact" class="btn-outline">Get in touch</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <span class="section-label">About me</span>
+    <div class="about-grid fade-in">
+      <div>
+        <div class="avatar">YN</div>
+        <h2>The person<br>behind the work</h2>
+        <p class="about-body">Write a couple of sentences about yourself here — your background, what you care about, and what makes you different. Be direct and specific. Readers want to know the person, not a list of buzzwords.</p>
+        <p class="about-body">You can add a second paragraph if needed — maybe about your working style, what kinds of projects excite you, or where you're based.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-row">
+          <span class="stat-label">Years of experience</span>
+          <span class="stat-val">5+</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Projects shipped</span>
+          <span class="stat-val">30+</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Clients worked with</span>
+          <span class="stat-val">12</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Based in</span>
+          <span class="stat-val" style="font-size: 20px; font-family: var(--font-body);">Your City</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <span class="section-label">Work</span>
+    <h2 class="fade-in">Selected projects</h2>
+    <div class="projects-grid fade-in">
+      <div class="project-card">
+        <span class="project-tag">Web app</span>
+        <h3>Project One</h3>
+        <p>A short description of what this project does and the problem it solves. Keep it to 2 punchy sentences. What was the challenge? What did you build?</p>
+        <a href="#" class="project-link">View case study →</a>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Open source</span>
+        <h3>Project Two</h3>
+        <p>A short description of what this project does and the problem it solves. Keep it to 2 punchy sentences. What was the challenge? What did you build?</p>
+        <a href="#" class="project-link">View on GitHub →</a>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Design</span>
+        <h3>Project Three</h3>
+        <p>A short description of what this project does and the problem it solves. Keep it to 2 punchy sentences. What was the challenge? What did you build?</p>
+        <a href="#" class="project-link">View live →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <span class="section-label">Expertise</span>
+    <h2 class="fade-in">Skills &amp; tools</h2>
+    <div class="skills-cols fade-in">
+      <div>
+        <p class="skill-group-label">Languages</p>
+        <div class="skill-pills">
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">TypeScript</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">HTML / CSS</span>
+        </div>
+      </div>
+      <div>
+        <p class="skill-group-label">Frameworks</p>
+        <div class="skill-pills">
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">Next.js</span>
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Tailwind</span>
+        </div>
+      </div>
+      <div>
+        <p class="skill-group-label">Tools</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">Figma</span>
+          <span class="skill-pill">VS Code</span>
+          <span class="skill-pill">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- RESUME -->
+  <section id="resume">
+    <span class="section-label">Experience</span>
+    <h2 class="fade-in">Where I've worked</h2>
+
+    <div class="resume-item fade-in">
+      <div>
+        <p class="resume-title">Senior Developer</p>
+        <p class="resume-company">Company Name &mdash; What you built or led here in one clear sentence.</p>
+      </div>
+      <span class="resume-date">2022 – Present</span>
+    </div>
+
+    <div class="resume-item fade-in">
+      <div>
+        <p class="resume-title">Developer</p>
+        <p class="resume-company">Company Name &mdash; What you built or led here in one clear sentence.</p>
+      </div>
+      <span class="resume-date">2020 – 2022</span>
+    </div>
+
+    <div class="resume-item fade-in">
+      <div>
+        <p class="resume-title">Junior Developer / Intern</p>
+        <p class="resume-company">Company Name &mdash; What you built or learned here in one clear sentence.</p>
+      </div>
+      <span class="resume-date">2019 – 2020</span>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <a href="resume.pdf" class="btn-outline" download>Download full resume (PDF)</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <span class="section-label">Say hello</span>
+    <h2 class="fade-in">Let's work together</h2>
+    <div class="contact-grid fade-in">
+      <div>
+        <p class="contact-intro">Whether you have a project in mind, a role to fill, or just want to say hi — my inbox is open. I typically reply within a day.</p>
+        <div class="contact-links">
+          <a href="mailto:you@example.com" class="contact-link">you@example.com</a>
+          <a href="https://linkedin.com/in/yourname" class="contact-link" target="_blank" rel="noopener">linkedin.com/in/yourname</a>
+          <a href="https://github.com/yourname" class="contact-link" target="_blank" rel="noopener">github.com/yourname</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Your message" required></textarea>
+        <button type="submit" class="btn-primary" style="align-self: flex-start;">Send message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Your Name</span>
+    <span>Built with HTML &amp; CSS · Hosted on GitHub Pages</span>
+  </footer>
+
+  <script>
+    // Scroll-triggered fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Nav active link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--text)'
+          : '';
+      });
+    });
+
+    // Simple form handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Message sent!';
+      btn.style.background = '#2d5a0e';
+      btn.style.color = '#c8f04a';
+      setTimeout(() => {
+        btn.textContent = 'Send message';
+        btn.style.background = '';
+        btn.style.color = '';
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
