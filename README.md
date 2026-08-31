@@ -2,4 +2,4 @@
 - Summary of work
 - Current projects
 
-[rwreynol.github.io](https://rwreynol.giithub.io)
+[rwreynol.github.io](https://rwreynol.github.io)
